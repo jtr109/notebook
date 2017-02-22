@@ -122,6 +122,32 @@ if __name__ == '__main__':
 
 ## 3 Linux
 
+### 3.1 定时调度 crontab
+
+#### 3.1.1 主配置文件路径
+
+/etc/crontab
+
+#### 3.1.2 基础命令
+
+- `-e`: 编辑当前 crontab
+- `-l`: 显示当前 crontab 任务列表
+- `-r`: 删除当前用户的 crontab
+
+#### 3.1.3 编辑格式
+
+minute hour day month dayofweek command
+
+- 范围:
+  - 第1列表示分钟1～59 每分钟用*或者 */1表示
+  - 第2列表示小时1～23（0表示0点）
+  - 第3列表示日期1～31
+  - 第4列表示月份1～12
+  - 第5列标识号星期0～6（0表示星期天）
+  - 第6列要运行的命令
+
+详情可查询[链接](http://blog.csdn.net/yangkai_hudong/article/details/13774895)
+
 ## 4 爬虫
 
 ## 5 前端
@@ -135,6 +161,57 @@ if __name__ == '__main__':
 ## 6 SQL / NoSQL
 
 ### 6.1 MySQL
+
+
+
+- 进入
+- 查询
+- 创建数据库, 表格
+- 删除
+
+### 6.2 数据库操作：SQLAlchemy
+
+* 关系型数据库：Mysql,pgsql
+* NoSQL: Mongo, Redis
+
+#### 6.2.1 Flask-SQLAlchemy
+
+#### Model Relationships
+
+**One-to-Many Relationships**
+
+
+    # One side:
+    ...
+    addresses = db.relationship('Address', backref='person',
+        lazy='dynamic')
+    ...
+    
+    # Many side:
+    ...
+    person_id = db.Column(db.Integer, db.ForeignKey('person.id'))
+    ...
+
+**Many-to-Many Relationships**
+
+    tags = db.Table('tags',
+        db.Column('tag_id', db.Integer, db.ForeignKey('tag.id')),
+        db.Column('page_id', db.Integer, db.ForeignKey('page.id'))
+    )
+    
+    class Page(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        tags = db.relationship('Tag', secondary=tags,
+            backref=db.backref('pages', lazy='dynamic'))
+    
+    class Tag(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        
+_注意：多对多关系中，建立`Table`连接两个模型，在其中一侧声明`db.relationship`，其中`backref=db.backref('...', lazy= '...')。和一对多中不同。_
+
+#### Session
+
+对象只有在`commit`之后才会获得id
 
 ### 6.2 MongoDB
 
@@ -150,40 +227,32 @@ if __name__ == '__main__':
 
 ### 9.1 HTTP
 
------
+## 10. RESTFul规范
 
-历史笔记
-
------
-
-# 面试准备
-
-## 1. RESTFul规范
-
-### 1.1 含义
+### 10.1 含义
 
 representation state transfer
 
-### 1.2 核心概念
+### 10.2 核心概念
 
 *一切都是资源*
 
-### 1.3 资源和URI / URL
+### 10.3 资源和URI / URL
 
 用URI (Uniform Resource Identifier)表示单一资源，用URL表示资源集合
 
-### 1.4 资源设计理念
+### 10.4 资源设计理念
 
 URI的设计应该遵循可寻址性原则，具有自描述性，需要在形式上给人以直觉上的关联。
 
-### 1.5 URI设计技巧
+### 10.5 URI设计技巧
 
 * 单词用`-`隔开
 * `/`体现层级关系
 * 用`?`过滤资源：如，`/pulls?state=closed`
 * `,`或`;`表示同级关系：如，`/git/git/compare/master;next`
 
-### 1.6 请求与响应
+### 10.6 请求与响应
 
 请求：
 
@@ -203,76 +272,30 @@ URI的设计应该遵循可寻址性原则，具有自描述性，需要在形�
 * 500 (Internal Server Error)
 * 503 (Service Unavalible)
 
-### 1.7 URI规范
+### 10.7 URI规范
 
 *URI中不能使用动词，只能使用名词*
 
-### 1.8 超媒体概念
+### 10.8 超媒体概念
 
 超媒体即应用状态引擎 (hypermedia as the engine of application state)：把一个个把资源链接起来
 
-### 1.9 无状态通行原则
+### 10.9 无状态通行原则
 
 服务器不应该保存客户端的状态。客户端负责维护应用状态，而服务端维护资源状态。
 
-### 1.10 状态转移
+### 10.10 状态转移
 
 “会话”状态不是作为资源状态保存在服务端的，而是被客户端作为应用状态进行跟踪的。客户端应用状态在服务端提供的超媒体的指引下发生变迁。
 
-### 1.11 待学习知识
+### 10.11 待学习知识
 
 * 学习使用缓存
 
 * 学习如何在head中包含版本号
 
 
-## 2 数据库操作：SQLAlchemy
 
-* 关系型数据库：Mysql,pgsql
-* NoSQL: Mongo, Redis
-
-### 2.1 Flask-SQLAlchemy
-
-#### 2.1.1 Model Relationships
-
-##### One-to-Many Relationships
-
-    # One side:
-    ...
-    addresses = db.relationship('Address', backref='person',
-        lazy='dynamic')
-    ...
-    
-    # Many side:
-    ...
-    person_id = db.Column(db.Integer, db.ForeignKey('person.id'))
-    ...
-
-##### Many-to-Many Relationships
-
-    tags = db.Table('tags',
-        db.Column('tag_id', db.Integer, db.ForeignKey('tag.id')),
-        db.Column('page_id', db.Integer, db.ForeignKey('page.id'))
-    )
-    
-    class Page(db.Model):
-        id = db.Column(db.Integer, primary_key=True)
-        tags = db.relationship('Tag', secondary=tags,
-            backref=db.backref('pages', lazy='dynamic'))
-    
-    class Tag(db.Model):
-        id = db.Column(db.Integer, primary_key=True)
-        
-_注意：多对多关系中，建立`Table`连接两个模型，在其中一侧声明`db.relationship`，其中`backref=db.backref('...', lazy= '...')。和一对多中不同。_
-
-#### 2.1.2 Session
-
-对象只有在`commit`之后才会获得id
-
-### 2.1.3 其他待学习
-
-- SQLAlchemy
-- Mysql
 
 ## 3 TCP/IP, HTTP等常用协议
 
