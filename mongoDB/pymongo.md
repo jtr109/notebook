@@ -1,5 +1,7 @@
 # Pymongo 学习笔记
 
+[Pymongo 使用参考](http://www.cnblogs.com/hangxin1940/archive/2012/07/29/2806471.html)
+
 ## 1 登录认证
 
 ```
@@ -33,9 +35,33 @@ db.collection.insert_one(post)
 
 ### 2.3 documents
 
-#### 2.2.1 查看
+#### 2.2.1 插入
 
-#### 2.2.2 插入
+```
+posts = db.posts
+posts.insert(post)
+```
+
+#### 2.2.2 查询
+
+- 查询单个
+
+```
+posts.find_one({"author": "Mike"})
+```
+
+- 查询多个
+
+```
+for post in posts.find():   
+    post 
+```
+
+- 计数
+
+```
+posts.count()
+```
 
 #### 2.2.3 修改
 
