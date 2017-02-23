@@ -160,62 +160,35 @@ minute hour day month dayofweek command
 
 ## 6 SQL / NoSQL
 
+* 关系型数据库：Mysql,pgsql
+* NoSQL: Mongo, Redis
+
 ### 6.1 MySQL
 
+#### 6.1.1 基础操作
 
+通过SQL语句[增删改查](../mysql/usage.md)
 
 - 进入
 - 查询
 - 创建数据库, 表格
 - 删除
 
-### 6.2 数据库操作：SQLAlchemy
+#### 6.1.2 Python 操作
 
-* 关系型数据库：Mysql,pgsql
-* NoSQL: Mongo, Redis
-
-#### 6.2.1 Flask-SQLAlchemy
-
-#### Model Relationships
-
-**One-to-Many Relationships**
-
-
-    # One side:
-    ...
-    addresses = db.relationship('Address', backref='person',
-        lazy='dynamic')
-    ...
-    
-    # Many side:
-    ...
-    person_id = db.Column(db.Integer, db.ForeignKey('person.id'))
-    ...
-
-**Many-to-Many Relationships**
-
-    tags = db.Table('tags',
-        db.Column('tag_id', db.Integer, db.ForeignKey('tag.id')),
-        db.Column('page_id', db.Integer, db.ForeignKey('page.id'))
-    )
-    
-    class Page(db.Model):
-        id = db.Column(db.Integer, primary_key=True)
-        tags = db.relationship('Tag', secondary=tags,
-            backref=db.backref('pages', lazy='dynamic'))
-    
-    class Tag(db.Model):
-        id = db.Column(db.Integer, primary_key=True)
-        
-_注意：多对多关系中，建立`Table`连接两个模型，在其中一侧声明`db.relationship`，其中`backref=db.backref('...', lazy= '...')。和一对多中不同。_
-
-#### Session
-
-对象只有在`commit`之后才会获得id
+通过 Python 操作数据库: [MySQL With Python](../mysql/with_python.md)
 
 ### 6.2 MongoDB
 
+#### 6.2.1 基础操作
+
+#### 6.2.2 Python 操作
+
 ### 6.3 Redis
+
+#### 6.3.1 基础操作
+
+#### 6.3.2 Python 操作
 
 ## 7 Git
 
