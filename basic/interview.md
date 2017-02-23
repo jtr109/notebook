@@ -182,6 +182,9 @@ minute hour day month dayofweek command
 
 #### 6.2.1 基础操作
 
+[通过终端语句操作数据库](../MongoDB/usage.md)
+
+
 #### 6.2.2 Python 操作
 
 ### 6.3 Redis
