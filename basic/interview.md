@@ -196,6 +196,8 @@ minute hour day month dayofweek command
 
 ## 7 Git
 
+详见[相关笔记](../Git/operation.md)
+
 ## 8 部署相关
 
 ### 8.1 Nginx
