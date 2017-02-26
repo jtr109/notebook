@@ -25,3 +25,18 @@ $ git mv foo foo2
 $ git mv foo2 FOO
 ```
 
+## 2 git clean
+
+### 2.1 删除空目录
+
+_参考[文章](http://blog.csdn.net/skykingf/article/details/44078837)_
+
+使用 `git rm -rf dir` 命令删除非空目录之后，本地还是会有空的目录存在，这时候空目录已经是untracked状态了。
+
+解决办法是再删除掉untracked状态的目录，命令如下
+
+```
+$git clean -fd  
+```
+
+执行以上命令后，本地的空目录就没有了。
