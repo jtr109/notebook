@@ -40,3 +40,19 @@ $git clean -fd
 ```
 
 执行以上命令后，本地的空目录就没有了。
+
+
+## 3 git rebase
+
+### 3.1 简介
+
+变基拉取, 将源分支的改动作为补丁加入当前分支, 再将当前分支的改动添加到后面. 即 change the base.
+
+### 3.2 语句
+
+```shell
+$ git checkout dev  # go to the dev branch
+$ git rebase master  # rebase from master
+```
+
+
