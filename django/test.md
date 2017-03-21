@@ -31,3 +31,14 @@ Reference:
 - [Django test fail at postgres hstore migration](http://stackoverflow.com/questions/36322750/django-test-fail-at-postgres-hstore-migration)
 - [How to install PostgreSQL's hstore to your default database template](https://dwradcliffe.com/2013/01/10/install-hstore-to-default-template.html)
 
+## 3 fixture in Django test
+
+A fixture is a collection of data that Django knows how to import into a database. For example, if your site has user accounts, you might set up a fixture of fake user accounts in order to populate your database during tests.
+
+The most straightforward way of creating a fixture is to use the `manage.py dumpdata` command. 
+
+TestCase loads fixtures once for the entire test class, before setUpTestData(), instead of before each test, and it use transactions to clean the database before each test.
+
+Reference:
+
+- [Fixture loading](https://docs.djangoproject.com/en/1.10/topics/testing/tools/#fixture-loading)
