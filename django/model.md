@@ -89,3 +89,16 @@ Reference:
 
 - [Many-to-many relationships](https://docs.djangoproject.com/en/1.10/topics/db/examples/many_to_many/)
 
+# Dumpdata
+
+You can use `dumpdata` to get the whole database for you project. The file output can be used for fixture.
+
+The command should be like below:
+
+```bash
+$ python ./manage.py dumpdata mysite.ModelName --indent 2 -o ./path/to/save
+```
+
+Reference:
+
+- [dumpdata - Django Documentation](https://docs.djangoproject.com/en/1.10/ref/django-admin/#dumpdata)
